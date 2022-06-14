@@ -1,0 +1,18 @@
+<form [formGroup]="covidSearchForm" (submit)="onSubmit()" class="needs-validation" novalidate>
+  <div class="mb-3">
+    <label for="country" class="form-label">country</label>
+    <select id="country" class="form-control" formControlName="country">
+      <option>123</option>
+    </select>
+
+    <div id="passwordHelpBlock" class="form-text">
+      please be notified that all results will be related to the selected country
+    </div>
+
+    <div class="invalid-feedback">
+      Looks good!
+    </div>
+  </div>
+
+  <button type="submit">Save</button>
+</form>
