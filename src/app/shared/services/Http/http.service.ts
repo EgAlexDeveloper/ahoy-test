@@ -2,22 +2,34 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { HttpGetSuccessResponse } from '../../models/HttpSuccessResponse';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class HttpService {
-  private url: string = environment.urls.api;
-
   constructor(private http: HttpClient) { }
 
-  setUrl = (endPointName: string) => this.url += endPointName;
+  get = (endPointName: string): Observable<HttpGetSuccessResponse> => {
+    const response: Observable<HttpGetSuccessResponse> = new Observable(observer => {
+      this.http
+        .get(environment.urls.api + endPointName)
+        .subscribe((res: any) =>
+          observer.next({
+            errors: res.errors,
+            get: res.get,
+            parameters: res.parameters,
+            results: res.results,
+            response: res.response
+          })
+        );
+    });
 
-  get = (): Observable<any> => this.http.get(this.url);
-  post = (params: {} | []): Observable<any> => this.http.post(this.url, params);
-  put = (params: {} | []): Observable<any> => this.http.put(this.url, params);
-  delete = (): Observable<any> => this.http.delete(this.url);
+    return response;
+  };
+
+  post = (endPointName: string, params: {} | []): Observable<any> => this.http.post(environment.urls.api += endPointName, params);
+  put = (endPointName: string, params: {} | []): Observable<any> => this.http.put(environment.urls.api += endPointName, params);
+  delete = (endPointName: string): Observable<any> => this.http.delete(environment.urls.api += endPointName);
 
   // TODO to be used with FORMDATA type
-  // upload = (data: FormData): Observable<any> => this.http.post(this.url, data);
+  // upload = (endpoint: string, data: FormData): Observable<any> => this.http.post(this.setUrl(endpoint), data);
 }

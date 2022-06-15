@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-container',
+  selector: '[ahoy-container]',
   template: `
     <div class="{{isWide ? 'container-fluid' : 'container'}} {{className}}">
         <ng-content></ng-content>

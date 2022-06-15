@@ -13,10 +13,14 @@ export class RequestInterceptorService {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    req.headers.set('x-rapidapi-host', environment.config.apiHostHeaderName)
-    req.headers.set('x-rapidapi-key', environment.config.apiKey)
-    req.headers.set('Content-Type', 'application/json')
+    let request: HttpRequest<any> = req.clone({
+      setHeaders: {
+        'x-rapidapi-host': environment.config.apiHostHeaderName,
+        'x-rapidapi-key': environment.config.apiKey,
+        'Content-Type': 'application/json'
+      }
+    });
 
-    return next.handle(req);
+    return next.handle(request);
   }
 }

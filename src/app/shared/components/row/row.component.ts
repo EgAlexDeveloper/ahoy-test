@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-row',
+  selector: '[ahoy-row]',
   template: `
     <div class="row {{className}}">
       <ng-content></ng-content>

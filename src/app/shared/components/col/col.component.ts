@@ -1,15 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-col',
+  selector: '[ahoy-col]',
   template: `
-    <div class="{{className}}">
+    <div class="{{class}}">
       <ng-content></ng-content>
     </div>
   `
 })
 export class ColComponent implements OnInit {
-  @Input('className') className: string = 'col';
+  @Input('className') class: string = 'col';
   constructor() { }
 
   ngOnInit(): void {

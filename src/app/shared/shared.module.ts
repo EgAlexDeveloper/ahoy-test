@@ -7,7 +7,7 @@ import { HttpService } from './services/Http/http.service';
 import { RequestInterceptorService } from './services/Http/request-interceptor.service';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ResponseInterceptorService } from './services/Http/response-interceptor.service';
+// import { ResponseInterceptorService } from './services/Http/response-interceptor.service';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ContainerComponent } from './components/container/container.component';
@@ -20,7 +20,11 @@ import { CardHeaderComponent } from './components/card-header/card-header.compon
 import { CardFooterComponent } from './components/card-footer/card-footer.component';
 import { CardBodyComponent } from './components/card-body/card-body.component';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChartsComponent } from './components/charts/charts/charts.component';
+
 
 const Modules = [
   CommonModule,
@@ -28,7 +32,11 @@ const Modules = [
   BrowserModule,
   HttpClientModule,
   RouterModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  FormsModule,
+  NgxChartsModule,
+  BrowserAnimationsModule,
+
 ];
 
 const Components = [
@@ -41,13 +49,14 @@ const Components = [
   CardComponent,
   CardHeaderComponent,
   CardFooterComponent,
-  CardBodyComponent
+  CardBodyComponent,
+  ChartsComponent
 ];
 
 const services: Provider[] = [
   HttpService,
   { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true },
-  { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptorService, multi: true },
+  // { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptorService, multi: true },
 ];
 
 @NgModule({
